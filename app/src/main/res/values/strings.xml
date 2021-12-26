@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">Paket Produk</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">RetailPintar</string>
+    <string name="nav_header_subtitle">Aplikasi Untuk Menemukan Rekomendasi Paket Produk Ideal</string>
+    <string name="nav_header_desc">Peket Produk</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_beranda">Beranda</string>
+    <string name="menu_data_barang">Data Barang</string>
+    <string name="menu_bantuan">Bantuan</string>
+    <string name="menu_info">Info</string>
+    <string name="select">Pilih Barang</string>
+
+    <string-array name="barang_array">
+        <item>Normal Key</item>
+        <item>Lever Handle</item>
+        <item>Swing Lockcase</item>
+    </string-array>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hasil">Hasil :</string>
+</resources>
