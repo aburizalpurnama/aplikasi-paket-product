@@ -9,15 +9,11 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.Spinner;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -29,13 +25,10 @@ import com.example.paketproduct.algorithm.association.AssocRules;
 import com.example.paketproduct.algorithm.fpgrowth.AlgoFPGrowth;
 import com.example.paketproduct.algorithm.pattern.Itemsets;
 import com.example.paketproduct.databinding.FragmentBerandaBinding;
-import com.example.paketproduct.model.Barang;
 import com.example.paketproduct.model.BarangCreator;
-import com.example.paketproduct.model.Rule;
 import com.example.paketproduct.model.RuleCreator;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.io.IOException;
 
 import lombok.SneakyThrows;
 
@@ -49,7 +42,6 @@ public class BerandaFragment extends Fragment {
     AutoCompleteTextView autoCompleteText;
     ArrayAdapter<String> adapterItem;
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
     @SneakyThrows
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -59,6 +51,48 @@ public class BerandaFragment extends Fragment {
         binding = FragmentBerandaBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
+        runAlgorithm();
+
+        return root;
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+
+        autoCompleteText = binding.autoCompleteText;
+        adapterItem = new ArrayAdapter<>(getContext(), R.layout.list_item, BarangCreator.getListBarangAsString(fpgrowth));
+        autoCompleteText.setAdapter(adapterItem);
+
+        binding.rvRule.setVisibility(View.INVISIBLE);
+        binding.tvHasil.setVisibility(View.INVISIBLE);
+        autoCompleteText.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @SneakyThrows
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String item = parent.getItemAtPosition(position).toString();
+
+                if (position == 1 || position == 3 || position == 6 || position == 7 || position == 8
+                        || position == 9 || position == 12 || position == 14 || position == 17 || position == 18
+                        || position == 20 || position == 24  ){
+                    binding.tvHasil.setText("Tidak Ditemukan Kombinasi Paket Produk Ideal");
+                    binding.tvHasil.setVisibility(View.VISIBLE);
+                    binding.rvRule.setVisibility(View.VISIBLE);
+                    setUpRv(item, fpgrowth, rules);
+                }else {
+                    binding.tvHasil.setText("Hasil :");
+                    binding.tvHasil.setVisibility(View.VISIBLE);
+                    binding.rvRule.setVisibility(View.VISIBLE);
+
+                    setUpRv(item, fpgrowth, rules);
+                }
+            }
+        });
+
+    }
+
+    private void runAlgorithm() throws IOException {
         AssetManager assets = getContext().getAssets();
 
         // By changing the following lines to some other values
@@ -84,40 +118,6 @@ public class BerandaFragment extends Fragment {
         // Note: we pass null as output file path, because we don't want
         // to save the result to a file, but keep it into memory.
         rules = algoAgrawal.runAlgorithm(patterns,null, databaseSize, minconf, minlift);
-
-        autoCompleteText = binding.autoCompleteText;
-        adapterItem = new ArrayAdapter<>(getContext(), R.layout.list_item, BarangCreator.getListBarangAsString(fpgrowth));
-        autoCompleteText.setAdapter(adapterItem);
-
-        binding.rvRule.setVisibility(View.INVISIBLE);
-        binding.tvHasil.setVisibility(View.INVISIBLE);
-        autoCompleteText.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String item = parent.getItemAtPosition(position).toString();
-                if (position == 1 || position == 3 || position == 6 || position == 7 || position == 8
-                        || position == 9 || position == 12 || position == 14 || position == 17 || position == 18
-                        || position == 20 || position == 24  ){
-                    binding.tvHasil.setText("Tidak Ditemukan Kombinasi Paket Produk Ideal");
-                    binding.tvHasil.setVisibility(View.VISIBLE);
-                    binding.rvRule.setVisibility(View.VISIBLE);
-                    setUpRv(item, fpgrowth, rules);
-                }else {
-                    binding.tvHasil.setText("Hasil :");
-                    binding.tvHasil.setVisibility(View.VISIBLE);
-                    binding.rvRule.setVisibility(View.VISIBLE);
-                    setUpRv(item, fpgrowth, rules);
-                }
-            }
-        });
-
-        return root;
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-
-
     }
 
     @Override
