@@ -61,6 +61,16 @@
                 app:layout_constraintBottom_toTopOf="@+id/textInputLayout"
                 app:layout_constraintEnd_toEndOf="parent" />
 
+            <Button
+                android:id="@+id/btnRun"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Run"
+                app:layout_constraintBottom_toTopOf="@id/textInputLayout"
+                app:layout_constraintEnd_toEndOf="@+id/inputMinConf"
+                app:layout_constraintStart_toStartOf="@+id/inputMinsup"
+                app:layout_constraintTop_toBottomOf="@id/inputMinConf" />
+
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textInputLayout"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
@@ -70,8 +80,8 @@
                 android:hint="@string/select"
                 android:textColorHint="@color/black"
                 app:layout_constraintBottom_toTopOf="@+id/tv_hasil"
-                app:layout_constraintEnd_toEndOf="@+id/inputMinConf"
-                app:layout_constraintStart_toStartOf="@+id/inputMinsup">
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
 
                 <AutoCompleteTextView
                     android:id="@+id/auto_complete_text"

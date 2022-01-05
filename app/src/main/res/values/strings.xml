@@ -19,7 +19,7 @@
         <item>Swing Lockcase</item>
     </string-array>
 
-<!-- TODO: Remove or change this placeholder text -->
+    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="hasil">Hasil :</string>
     <string name="minimum_support">Minimum Supp.(%)</string>

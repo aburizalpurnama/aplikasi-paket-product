@@ -9,7 +9,11 @@
         android:id="@+id/nav_beranda"
         android:name="com.example.paketproduct.ui.beranda.BerandaFragment"
         android:label="@string/menu_beranda"
-        tools:layout="@layout/fragment_beranda" />
+        tools:layout="@layout/fragment_beranda" >
+        <action
+            android:id="@+id/action_nav_beranda_to_resultFragment"
+            app:destination="@id/resultFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_barang"
@@ -29,4 +33,13 @@
         android:label="@string/menu_info"
         tools:layout="@layout/fragment_info"
         />
+    <fragment
+        android:id="@+id/resultFragment"
+        android:name="com.example.paketproduct.ui.result.ResultFragment"
+        android:label="fragment_result"
+        tools:layout="@layout/fragment_result" >
+        <argument
+            android:name="resultRules"
+            app:argType="com.example.paketproduct.algorithm.association.ParcelableAssocResult" />
+    </fragment>
 </navigation>
