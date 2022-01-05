@@ -28,10 +28,10 @@
 
             <EditText
                 android:id="@+id/inputMinsup"
-                android:layout_width="86dp"
-                android:layout_height="48dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="4dp"
+                android:layout_width="141dp"
+                android:layout_height="42dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="8dp"
                 android:background="@drawable/custom_input"
                 android:drawableStart="@drawable/setting"
                 android:drawablePadding="12dp"
@@ -44,10 +44,10 @@
 
             <EditText
                 android:id="@+id/inputMinConf"
-                android:layout_width="86dp"
-                android:layout_height="48dp"
+                android:layout_width="140dp"
+                android:layout_height="42dp"
                 android:layout_marginTop="12dp"
-                android:layout_marginEnd="4dp"
+                android:layout_marginEnd="8dp"
                 android:background="@drawable/custom_input"
                 android:drawableStart="@drawable/setting"
                 android:drawablePadding="12dp"
@@ -60,36 +60,43 @@
 
             <Button
                 android:id="@+id/btnRun"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_width="139dp"
+                android:layout_height="49dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
                 android:text="Run"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/inputMinConf" />
+                app:layout_constraintTop_toBottomOf="@+id/inputMinConf"
+                app:layout_constraintVertical_bias="1.0" />
 
             <TextView
                 android:id="@+id/textView3"
-                android:layout_width="190dp"
-                android:layout_height="32dp"
-                android:layout_marginTop="28dp"
+                android:layout_width="201dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="26dp"
+                android:layout_marginEnd="8dp"
                 android:text="@string/minimum_support"
-                android:textSize="18sp"
+                android:textAlignment="textEnd"
+                android:textSize="21sp"
                 app:layout_constraintEnd_toStartOf="@+id/inputMinsup"
-                app:layout_constraintHorizontal_bias="0.262"
+                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
             <TextView
                 android:id="@+id/textView4"
-                android:layout_width="191dp"
+                android:layout_width="198dp"
                 android:layout_height="34dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
                 android:text="@string/minimum_conf"
-                android:textSize="18sp"
+                android:textAlignment="textEnd"
+                android:textSize="21sp"
                 app:layout_constraintEnd_toStartOf="@+id/inputMinsup"
-                app:layout_constraintHorizontal_bias="0.265"
+                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView3" />
 

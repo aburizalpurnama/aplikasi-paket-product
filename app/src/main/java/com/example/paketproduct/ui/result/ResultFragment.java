@@ -72,10 +72,8 @@ public class ResultFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String item = parent.getItemAtPosition(position).toString();
 
-                Toast.makeText(getContext(), item, Toast.LENGTH_SHORT).show();
                 setUpRv(item, fpgrowth, rules);
                 binding.rvRule.setVisibility(View.VISIBLE);
-
             }
         });
 
