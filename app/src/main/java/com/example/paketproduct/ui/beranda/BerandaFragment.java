@@ -24,6 +24,7 @@ import com.example.paketproduct.R;
 import com.example.paketproduct.adapter.RuleAdapter;
 import com.example.paketproduct.algorithm.association.AlgoAgrawalFaster94;
 import com.example.paketproduct.algorithm.association.AssocRules;
+import com.example.paketproduct.algorithm.association.ParcelableAssocResult;
 import com.example.paketproduct.algorithm.fpgrowth.AlgoFPGrowth;
 import com.example.paketproduct.algorithm.pattern.Itemsets;
 import com.example.paketproduct.databinding.FragmentBerandaBinding;

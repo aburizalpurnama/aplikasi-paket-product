@@ -19,6 +19,8 @@
 
 
  import android.content.res.AssetManager;
+ import android.os.Parcel;
+ import android.os.Parcelable;
 
  import java.io.BufferedReader;
  import java.io.BufferedWriter;
@@ -54,7 +56,7 @@
   * @see Itemsets
   * @author Philippe Fournier-Viger
   */
- public class AlgoFPGrowth {
+ public class AlgoFPGrowth implements Parcelable {
 
      // for statistics
      private long startTimestamp; // start time of the latest execution
@@ -557,4 +559,70 @@
      public Map<String, Integer> getItemAndInit() {
          return itemAndInit;
      }
+
+
+     @Override
+     public int describeContents() {
+         return 0;
+     }
+
+     @Override
+     public void writeToParcel(Parcel dest, int flags) {
+         dest.writeInt(this.initAndItem.size());
+         for (Map.Entry<Integer, String> entry : this.initAndItem.entrySet()) {
+             dest.writeValue(entry.getKey());
+             dest.writeString(entry.getValue());
+         }
+         dest.writeInt(this.itemAndInit.size());
+         for (Map.Entry<String, Integer> entry : this.itemAndInit.entrySet()) {
+             dest.writeString(entry.getKey());
+             dest.writeValue(entry.getValue());
+         }
+     }
+
+     public void readFromParcel(Parcel source) {
+         int initAndItemSize = source.readInt();
+         this.initAndItem = new HashMap<Integer, String>(initAndItemSize);
+         for (int i = 0; i < initAndItemSize; i++) {
+             Integer key = (Integer) source.readValue(Integer.class.getClassLoader());
+             String value = source.readString();
+             this.initAndItem.put(key, value);
+         }
+         int itemAndInitSize = source.readInt();
+         this.itemAndInit = new HashMap<String, Integer>(itemAndInitSize);
+         for (int i = 0; i < itemAndInitSize; i++) {
+             String key = source.readString();
+             Integer value = (Integer) source.readValue(Integer.class.getClassLoader());
+             this.itemAndInit.put(key, value);
+         }
+     }
+
+     protected AlgoFPGrowth(Parcel in) {
+         int initAndItemSize = in.readInt();
+         this.initAndItem = new HashMap<Integer, String>(initAndItemSize);
+         for (int i = 0; i < initAndItemSize; i++) {
+             Integer key = (Integer) in.readValue(Integer.class.getClassLoader());
+             String value = in.readString();
+             this.initAndItem.put(key, value);
+         }
+         int itemAndInitSize = in.readInt();
+         this.itemAndInit = new HashMap<String, Integer>(itemAndInitSize);
+         for (int i = 0; i < itemAndInitSize; i++) {
+             String key = in.readString();
+             Integer value = (Integer) in.readValue(Integer.class.getClassLoader());
+             this.itemAndInit.put(key, value);
+         }
+     }
+
+     public static final Parcelable.Creator<AlgoFPGrowth> CREATOR = new Parcelable.Creator<AlgoFPGrowth>() {
+         @Override
+         public AlgoFPGrowth createFromParcel(Parcel source) {
+             return new AlgoFPGrowth(source);
+         }
+
+         @Override
+         public AlgoFPGrowth[] newArray(int size) {
+             return new AlgoFPGrowth[size];
+         }
+     };
  }

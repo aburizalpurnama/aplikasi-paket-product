@@ -17,6 +17,9 @@ package com.example.paketproduct.algorithm.association;
 * SPMF. If not, see <http://www.gnu.org/licenses/>.
 */
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -35,12 +38,15 @@ import java.util.List;
  * @author Philippe Fournier-Viger
  */
 
-public class AssocRules {
+public class AssocRules implements Parcelable {
 	// a list of association rules
 	public final List<AssocRule> rules = new ArrayList<AssocRule>();  // rules
 	
 	// a name that an algorithm can give to this list of association rules
-	private final String name;
+	private String name;
+
+	// get all rule
+	private List<Rule> allRule;
 	
 	/**
 	 * Sort the rules by confidence
@@ -102,7 +108,7 @@ public class AssocRules {
 	 * Return rules
 	 */
 	public List<Rule> getAllRule(){
-		List<Rule> allRule = new ArrayList<>();
+		allRule = new ArrayList<>();
 		for (AssocRule rule : rules){
 			allRule.add(rule);
 		}
@@ -166,6 +172,37 @@ public class AssocRules {
 	public List<AssocRule> getRules() {
 		return rules;
 	}
-	
-	
+
+
+	@Override
+	public int describeContents() {
+		return 0;
+	}
+
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		dest.writeList(this.allRule);
+	}
+
+	public void readFromParcel(Parcel source) {
+		this.allRule = new ArrayList<Rule>();
+		source.readList(this.allRule, Rule.class.getClassLoader());
+	}
+
+	public AssocRules(Parcel in) {
+		this.allRule = new ArrayList<Rule>();
+		in.readList(this.allRule, Rule.class.getClassLoader());
+	}
+
+	public static final Parcelable.Creator<AssocRules> CREATOR = new Parcelable.Creator<AssocRules>() {
+		@Override
+		public AssocRules createFromParcel(Parcel source) {
+			return new AssocRules(source);
+		}
+
+		@Override
+		public AssocRules[] newArray(int size) {
+			return new AssocRules[size];
+		}
+	};
 }

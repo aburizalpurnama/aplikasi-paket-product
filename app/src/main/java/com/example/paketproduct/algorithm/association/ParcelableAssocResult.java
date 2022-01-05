@@ -27,8 +27,8 @@ public class ParcelableAssocResult implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeParcelable((Parcelable) this.fpGrowth, flags);
-        dest.writeParcelable((Parcelable) this.rules, flags);
+        dest.writeParcelable(this.fpGrowth, flags);
+        dest.writeParcelable(this.rules, flags);
     }
 
     public void readFromParcel(Parcel source) {
