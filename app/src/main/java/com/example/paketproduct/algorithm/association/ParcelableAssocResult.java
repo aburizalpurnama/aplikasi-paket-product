@@ -19,6 +19,13 @@ public class ParcelableAssocResult implements Parcelable {
         this.rules = rules;
     }
 
+    public AlgoFPGrowth getFpGrowth() {
+        return fpGrowth;
+    }
+
+    public AssocRules getRules() {
+        return rules;
+    }
 
     @Override
     public int describeContents() {

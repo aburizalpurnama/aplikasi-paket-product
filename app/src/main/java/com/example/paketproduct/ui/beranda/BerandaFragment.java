@@ -17,6 +17,8 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavDirections;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -61,10 +63,6 @@ public class BerandaFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
-        binding.rvRule.setVisibility(View.INVISIBLE);
-        binding.tvHasil.setVisibility(View.INVISIBLE);
-        binding.autoCompleteText.setVisibility(View.INVISIBLE);
-
         binding.btnRun.setOnClickListener(new View.OnClickListener() {
             @SneakyThrows
             @Override
@@ -75,36 +73,10 @@ public class BerandaFragment extends Fragment {
                     double minsup = Double.parseDouble(binding.inputMinsup.getText().toString()) / 100 ;
                     double minconf = Double.parseDouble(binding.inputMinConf.getText().toString()) / 100 ;
 
-                    runAlgorithm(minsup, minconf);
-                    autoCompleteText = binding.autoCompleteText;
-                    adapterItem = new ArrayAdapter<>(getContext(), R.layout.list_item, BarangCreator.getListBarangAsString(fpgrowth));
-                    autoCompleteText.setAdapter(adapterItem);
+                    ParcelableAssocResult assocResult = runAlgorithm(minsup, minconf);
 
-                    autoCompleteText.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                        @RequiresApi(api = Build.VERSION_CODES.N)
-                        @SneakyThrows
-                        @Override
-                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                            String item = parent.getItemAtPosition(position).toString();
-
-                            if (position == 1 || position == 3 || position == 6 || position == 7 || position == 8
-                                    || position == 9 || position == 12 || position == 14 || position == 17 || position == 18
-                                    || position == 20 || position == 24  ){
-                                binding.tvHasil.setText("Tidak Ditemukan Kombinasi Paket Produk Ideal");
-                                binding.tvHasil.setVisibility(View.VISIBLE);
-                                binding.rvRule.setVisibility(View.VISIBLE);
-                                setUpRv(item, fpgrowth, rules);
-                            }else {
-                                binding.tvHasil.setText("Hasil :");
-                                binding.tvHasil.setVisibility(View.VISIBLE);
-                                binding.rvRule.setVisibility(View.VISIBLE);
-
-                                setUpRv(item, fpgrowth, rules);
-                            }
-                        }
-                    });
-
-                    binding.autoCompleteText.setVisibility(View.VISIBLE);
+                    NavDirections action = BerandaFragmentDirections.actionNavBerandaToResultFragment(assocResult);
+                    Navigation.findNavController(requireView()).navigate(action);
                 }
             }
         });
@@ -117,16 +89,7 @@ public class BerandaFragment extends Fragment {
         binding = null;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
-    private void setUpRv(String selectedItem, AlgoFPGrowth fpgrowth, AssocRules rules){
-        LinearLayoutManager layoutManager =new LinearLayoutManager(getContext());
-        RuleAdapter adapter = new RuleAdapter(RuleCreator.getAllRule(selectedItem, fpgrowth, rules), fpgrowth);
-        RecyclerView recyclerView = binding.rvRule;
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(adapter);
-    }
-
-    private void runAlgorithm(double minsupp, double minconf) throws IOException {
+    private ParcelableAssocResult runAlgorithm(double minsupp, double minconf) throws IOException {
         AssetManager assets = getContext().getAssets();
 
         // By changing the following lines to some other values
@@ -150,5 +113,7 @@ public class BerandaFragment extends Fragment {
         // Note: we pass null as output file path, because we don't want
         // to save the result to a file, but keep it into memory.
         rules = algoAgrawal.runAlgorithm(patterns,null, databaseSize, minconf, minlift);
+
+        return new ParcelableAssocResult(fpgrowth, rules);
     }
 }

@@ -28,95 +28,70 @@
 
             <EditText
                 android:id="@+id/inputMinsup"
-                android:layout_width="185dp"
+                android:layout_width="86dp"
                 android:layout_height="48dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="4dp"
                 android:background="@drawable/custom_input"
                 android:drawableStart="@drawable/setting"
                 android:drawablePadding="12dp"
                 android:ems="10"
-                android:hint="@string/minimum_support"
                 android:inputType="number"
                 android:padding="4dp"
-                app:layout_constraintBottom_toTopOf="@+id/textInputLayout"
-                app:layout_constraintEnd_toStartOf="@+id/inputMinConf"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/imageView2"
-                />
+                tools:ignore="SpeakableTextPresentCheck" />
 
             <EditText
                 android:id="@+id/inputMinConf"
-                android:layout_width="185dp"
+                android:layout_width="86dp"
                 android:layout_height="48dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="8dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="4dp"
                 android:background="@drawable/custom_input"
                 android:drawableStart="@drawable/setting"
                 android:drawablePadding="12dp"
                 android:ems="10"
-                android:hint="@string/minimum_conf"
                 android:inputType="number"
                 android:padding="4dp"
-                app:layout_constraintBottom_toTopOf="@+id/textInputLayout"
-                app:layout_constraintEnd_toEndOf="parent" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/inputMinsup"
+                tools:ignore="SpeakableTextPresentCheck" />
 
             <Button
                 android:id="@+id/btnRun"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
                 android:text="Run"
-                app:layout_constraintBottom_toTopOf="@id/textInputLayout"
-                app:layout_constraintEnd_toEndOf="@+id/inputMinConf"
-                app:layout_constraintStart_toStartOf="@+id/inputMinsup"
-                app:layout_constraintTop_toBottomOf="@id/inputMinConf" />
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputLayout"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="16dp"
-                android:hint="@string/select"
-                android:textColorHint="@color/black"
-                app:layout_constraintBottom_toTopOf="@+id/tv_hasil"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent">
-
-                <AutoCompleteTextView
-                    android:id="@+id/auto_complete_text"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="none" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <TextView
-                android:id="@+id/tv_hasil"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginBottom="8dp"
-                android:text="@string/hasil"
-                android:textAlignment="textStart"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@id/rv_rule"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_rule"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:layout_marginTop="4dp"
-                android:layout_marginEnd="4dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintTop_toBottomOf="@+id/inputMinConf" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="190dp"
+                android:layout_height="32dp"
+                android:layout_marginTop="28dp"
+                android:text="@string/minimum_support"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toStartOf="@+id/inputMinsup"
+                app:layout_constraintHorizontal_bias="0.262"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="191dp"
+                android:layout_height="34dp"
+                android:layout_marginTop="24dp"
+                android:text="@string/minimum_conf"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toStartOf="@+id/inputMinsup"
+                app:layout_constraintHorizontal_bias="0.265"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
